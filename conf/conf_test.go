@@ -31,9 +31,9 @@ func TestConfigParse(t *testing.T) {
 func TestConfigParseCustomNamespaces(t *testing.T) {
 	os.Clearenv()
 	env := map[string]string{
-		"PROJECT":            "default",
-		"ARGOCD_NAMESPACE":   "custom-argocd",
-		"CLUSTER_NAMESPACE":  "custom-clusters",
+		"PROJECT":           "default",
+		"ARGOCD_NAMESPACE":  "custom-argocd",
+		"CLUSTER_NAMESPACE": "custom-clusters",
 	}
 	for k, v := range env {
 		_ = os.Setenv(k, v)

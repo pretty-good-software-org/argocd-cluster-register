@@ -96,7 +96,7 @@ func (r *ClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ct
 		if err != nil {
 			return ctrl.Result{}, err
 		}
-		if err = r.ensureSecret(ctx, kcfg, cluster); err != nil {
+		if err = r.ensureSecret(ctx, kcfg); err != nil {
 			return ctrl.Result{}, err
 		}
 		if err = r.addToProject(ctx, kcfg); err != nil {
@@ -244,7 +244,7 @@ func (r *ClusterReconciler) deleteSecret(
 }
 
 func (r *ClusterReconciler) ensureSecret(
-	ctx context.Context, kubeconfig *clientcmdapi.Config, cluster capiv1.Cluster) error {
+	ctx context.Context, kubeconfig *clientcmdapi.Config) error {
 	clusterName := kubeconfig.Contexts[kubeconfig.CurrentContext].Cluster
 	authName := kubeconfig.Contexts[kubeconfig.CurrentContext].AuthInfo
 	server := kubeconfig.Clusters[clusterName].Server

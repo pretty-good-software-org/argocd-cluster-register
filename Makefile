@@ -147,7 +147,7 @@ undeploy: ## Undeploy controller from the K8s cluster specified in ~/.kube/confi
 CONTROLLER_GEN ?= $(LOCALBIN)/controller-gen-$(CONTROLLER_TOOLS_VERSION)
 KUSTOMIZE ?= $(LOCALBIN)/kustomize-$(KUSTOMIZE_VERSION)
 KUSTOMIZE_VERSION ?= v5.4.1
-CONTROLLER_TOOLS_VERSION ?= v0.16.3
+CONTROLLER_TOOLS_VERSION ?= v0.20.1
 GOLANGCI_LINT ?= $(LOCALBIN)/golangci-lint-$(GOLANGCI_LINT_VERSION)
 GOLANGCI_LINT_VERSION ?= v2.6.2
 GOSEC ?= $(LOCALBIN)/gosec-$(GOSEC_VERSION)
@@ -179,9 +179,15 @@ purge:
 	$(shell $(GREP) -Eo '<img src=\\"[^"]+\\"' $(README_TMP) | $(GREP) camo | $(GREP) -Eo 'https[^"\\]+' | xargs -I {} $(CURL) -w "\n" -s -X PURGE {}; echo complete)
 
 ENVTEST = $(shell pwd)/bin/setup-envtest
+SETUP_ENVTEST_VERSION ?= v0.24.1
 .PHONY: envtest
-envtest: ## Download envtest-setup locally if necessary.
-	$(call go-get-tool,$(ENVTEST),sigs.k8s.io/controller-runtime/tools/setup-envtest@latest)
+envtest: $(ENVTEST) ## Download envtest-setup locally if necessary.
+$(ENVTEST): $(LOCALBIN)
+	@[ -f $(ENVTEST) ] || { \
+	set -e; \
+	echo "Downloading sigs.k8s.io/controller-runtime/tools/setup-envtest@$(SETUP_ENVTEST_VERSION)"; \
+	GOBIN=$(LOCALBIN) go install sigs.k8s.io/controller-runtime/tools/setup-envtest@$(SETUP_ENVTEST_VERSION); \
+	}
 
 .PHONY: lint
 lint: golangci-lint ## Run golangci-lint against code.
