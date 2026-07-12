@@ -152,6 +152,8 @@ GOLANGCI_LINT ?= $(LOCALBIN)/golangci-lint-$(GOLANGCI_LINT_VERSION)
 GOLANGCI_LINT_VERSION ?= v2.6.2
 GOSEC ?= $(LOCALBIN)/gosec-$(GOSEC_VERSION)
 GOSEC_VERSION ?= v2.22.10
+CHANGIE ?= $(LOCALBIN)/changie-$(CHANGIE_VERSION)
+CHANGIE_VERSION ?= v1.24.0
 
 .PHONY: kustomize
 kustomize: $(KUSTOMIZE) ## Download kustomize locally if necessary.
@@ -196,6 +198,13 @@ lint: golangci-lint ## Run golangci-lint against code.
 .PHONY: gosec
 gosec: gosecbin ## Run gosec against code.
 	$(GOSEC) ./...
+
+.PHONY: changie
+changie: $(CHANGIE) ## Add a changelog entry.
+	$(CHANGIE) new
+
+$(CHANGIE): $(LOCALBIN)
+	$(call go-install-tool,$(CHANGIE),github.com/miniscruff/changie,$(CHANGIE_VERSION))
 
 # go-get-tool will 'go get' any package $2 and install it to $1.
 PROJECT_DIR := $(shell dirname $(abspath $(lastword $(MAKEFILE_LIST))))
