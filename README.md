@@ -18,7 +18,7 @@ Cluster secret into the ArgoCD namespace. Furthermore it will then add the Clust
 
 Thus the Cluster-Register controller never contacts CAPI or ArgoCD directly. Providing two benefits, re-use of
 [Kubernetes RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) and ease of programming as there is
-only the controller-runtime/kubebuilder to interacte with.
+only the controller-runtime/kubebuilder to interact with.
 
 ## Getting Started
 
@@ -38,7 +38,7 @@ cosign verify ghcr.io/hyperspike/argocd-cluster-register:$LATEST  --certificate-
 
 ### Notes
 
-ArgoCD-Cluster-Register doesn't provide label based filtering at this time, but this feature is planed.
+ArgoCD-Cluster-Register doesn't provide label-based filtering at this time, but this feature is planned.
 
 Testing includes
 [Kubeadm](https://kubernetes.io/docs/reference/setup-tools/kubeadm/)/[CAPI-Docs](https://cluster-api.sigs.k8s.io/tasks/kubeadm-bootstrap.html)

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Test staged Markdown hook content guard"
+set -euo pipefail
+
+bash scripts/check-staged-markdown-test.sh
