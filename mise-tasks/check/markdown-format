@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Check Markdown formatting with mdformat"
+set -euo pipefail
+
+mdformat --check .

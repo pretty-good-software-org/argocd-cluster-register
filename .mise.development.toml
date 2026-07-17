@@ -1,0 +1,9 @@
+# Development profile — tools needed for local hooks
+[tools]
+lefthook = "1.13.6"
+
+[settings]
+experimental = true
+
+[hooks]
+enter = 'test -f .git/hooks/pre-commit || lefthook install'
