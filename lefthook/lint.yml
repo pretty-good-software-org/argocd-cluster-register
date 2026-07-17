@@ -1,0 +1,11 @@
+pre-commit:
+  commands:
+    markdown-format:
+      glob: "**/*.md"
+      run: mdformat --check {staged_files}
+      fail_text: "mdformat found formatting issues"
+
+    markdownlint:
+      glob: "**/*.md"
+      run: markdownlint-cli2 {staged_files}
+      fail_text: "markdownlint found issues"

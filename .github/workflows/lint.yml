@@ -1,0 +1,23 @@
+name: Lint
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+env:
+  MISE_ENV: ci
+
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: pretty-good-software-org/ci-shared/actions/setup/mise@1ab91760d0b1a9cf368ecda69db5e4795c592b7c # v1
+        with:
+          mise-env: ci
+      - run: mise run lint:default
