@@ -42,7 +42,9 @@ import (
 )
 
 const (
-	Deleting = "Deleting"
+	Deleting         = "Deleting"
+	argoCDNamespace  = "argocd"
+	clusterNameLabel = "cluster.x-k8s.io/cluster-name"
 )
 
 // ClusterReconciler reconciles a Cluster object
@@ -128,7 +130,7 @@ func (r *ClusterReconciler) ensureCNI(
 			Name:      req.Name + "-cni",
 			Namespace: req.Namespace,
 			Labels: map[string]string{
-				"cluster.x-k8s.io/cluster-name": req.Name,
+				clusterNameLabel: req.Name,
 			},
 			OwnerReferences: []metav1.OwnerReference{
 				{
@@ -173,7 +175,7 @@ func (r *ClusterReconciler) ensureCNI(
 			Name:      req.Name + "-cni",
 			Namespace: req.Namespace,
 			Labels: map[string]string{
-				"cluster.x-k8s.io/cluster-name": req.Name,
+				clusterNameLabel: req.Name,
 			},
 			OwnerReferences: []metav1.OwnerReference{
 				{
@@ -230,7 +232,7 @@ func (r *ClusterReconciler) deleteSecret(
 		},
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      clusterName + "-cluster-secret",
-			Namespace: "argocd",
+			Namespace: argoCDNamespace,
 		},
 	}
 	err := r.Delete(ctx, &secret)
@@ -273,11 +275,11 @@ func (r *ClusterReconciler) ensureSecret(
 		},
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      clusterName + "-cluster-secret",
-			Namespace: "argocd",
+			Namespace: argoCDNamespace,
 			Labels: map[string]string{
-				"app.kubernetes.io/part-of":      "argocd",
+				"app.kubernetes.io/part-of":      argoCDNamespace,
 				"argocd.argoproj.io/secret-type": "cluster",
-				"cluster.x-k8s.io/cluster-name":  clusterName,
+				clusterNameLabel:                 clusterName,
 			},
 		},
 		StringData: map[string]string{
@@ -306,7 +308,7 @@ func (r *ClusterReconciler) removeFromProject(ctx context.Context, kubeconfig *c
 		project := argoappv1.AppProject{}
 		projectReq := types.NamespacedName{
 			Name:      proj,
-			Namespace: "argocd",
+			Namespace: argoCDNamespace,
 		}
 		err := r.Get(ctx, projectReq, &project)
 		if err != nil {
@@ -337,7 +339,7 @@ func (r *ClusterReconciler) addToProject(ctx context.Context, kubeconfig *client
 		project := argoappv1.AppProject{}
 		projectReq := types.NamespacedName{
 			Name:      proj,
-			Namespace: "argocd",
+			Namespace: argoCDNamespace,
 		}
 		err := r.Get(ctx, projectReq, &project)
 		if err != nil {
