@@ -10,12 +10,8 @@ actionlint = "1.7.11"
 cocogitto = "6.5.0"
 yamllint = "1.38.0"
 markdownlint-cli2 = "0.22.0"
+rumdl = "0.2.38"
 python = "3.10.18"
 uv = "0.11.26"
 
-# mdformat and its plugins are installed from mdformat-requirements.lock by
-# setup:mdformat. The environment is outside the repository so `mdformat .`
-# never traverses installed package Markdown. The sourced task derives its
-# repository and lock-specific path and activates that path in PATH.
 [env]
-_.source = "mise-tasks/setup/mdformat-env"
