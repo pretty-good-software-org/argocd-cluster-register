@@ -73,10 +73,6 @@ checksum = "sha256:ddad1e62028e328db6e373232ff9166f21dfeadfe2c8784f327e88f46081f
 url = "https://github.com/cocogitto/cocogitto/releases/download/6.5.0/cocogitto-6.5.0-x86_64-apple-darwin.tar.gz"
 url_api = "https://api.github.com/repos/cocogitto/cocogitto/releases/assets/311583378"
 
-[[tools.markdownlint-cli2]]
-version = "0.22.0"
-backend = "npm:markdownlint-cli2"
-
 [[tools.python]]
 version = "3.10.18"
 backend = "core:python"
