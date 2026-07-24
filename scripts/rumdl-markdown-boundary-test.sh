@@ -21,9 +21,7 @@ expected=$'1. one\n2. two\n\n| Name | Value |\n| ---- | ----- |\n| a    | b     
 actual="$(cat "$work/fixture.md")"$'\n'
 [[ "$actual" == "$expected" ]] || { printf 'unexpected formatted boundary fixture:\n%s' "$actual" >&2; exit 1; }
 
-cp "$root/.rumdl.toml" "$work/rumdl.toml"
-sed -i.bak 's/^enabled = false$/enabled = true/' "$work/rumdl.toml"
-if rumdl check --deny-config-warnings --config "$work/rumdl.toml" -- "$work/mutation.md"; then
+if rumdl check --deny-config-warnings --extend-enable MD060 -- "$work/mutation.md"; then
   printf 'formatter override mutation unexpectedly succeeded\n' >&2
   exit 1
 fi
