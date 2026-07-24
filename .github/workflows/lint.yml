@@ -25,3 +25,4 @@ jobs:
           mise-env: ci
       - run: mise run lint:default
       - run: mise run test:staged-markdown-hook
+      - run: bash scripts/rumdl-markdown-boundary-test.sh
