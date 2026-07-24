@@ -22,6 +22,7 @@ tables = false
 style = "ordered"
 
 [MD060]
+enabled = false
 style = "aligned"
 max-width = 120
 
