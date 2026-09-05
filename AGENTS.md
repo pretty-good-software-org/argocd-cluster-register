@@ -30,12 +30,10 @@ The controller never talks to CAPI or ArgoCD directly outside the Kubernetes API
 │   └── workflows
 │       ├── build.yaml
 │       ├── image.yaml
-│       ├── lint.yml
 │       ├── publish.yaml
 │       └── scan.yaml
 ├── .gitignore
 ├── .golangci.yml
-├── .mise.ci.toml
 ├── .mise.development.toml
 ├── .mise.toml
 ├── .miserc.toml
@@ -111,8 +109,7 @@ The controller never talks to CAPI or ArgoCD directly outside the Kubernetes API
 ├── mise.lock
 ├── scripts
 │   ├── check-staged-markdown-test.sh
-│   ├── check-staged-markdown.sh
-│   └── rumdl-markdown-boundary-test.sh
+│   └── check-staged-markdown.sh
 └── version.go
 ```
 
@@ -139,8 +136,9 @@ mise run lint:default # markdown lint (check:markdown-format + lint:rumdl)
 ```
 
 `mise run setup:default` installs pinned tools and `lefthook` git hooks (`.mise.toml`, `.mise.development.toml`).
-CI runs lint (`.github/workflows/lint.yml`), build (`build.yaml`), image build/publish (`image.yaml`, `publish.yaml`),
-and security scanning (`scan.yaml`).
+CI runs build (`build.yaml`), image build/publish (`image.yaml`, `publish.yaml`), and security scanning
+(`scan.yaml`); Markdown formatting is enforced locally by the `lefthook` pre-commit hooks (`rumdl fmt`/`rumdl check`)
+rather than in CI.
 
 ## Git Workflow
 
