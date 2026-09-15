@@ -1,6 +1,6 @@
 # Development profile — tools needed for local hooks
 [tools]
-lefthook = "1.13.6"
+lefthook = "2.1.14"
 
 [settings]
 experimental = true
