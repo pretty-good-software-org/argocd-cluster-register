@@ -1,6 +1,6 @@
 module github.com/hyperspike/argocd-cluster-register
 
-go 1.26.0
+go 1.26.6
 
 require (
 	github.com/argoproj/argo-cd/v3 v3.3.10

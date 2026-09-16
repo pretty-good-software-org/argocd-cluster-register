@@ -5,5 +5,8 @@ body: |-
   report either as reachable from this module, so the bump is hygiene rather than an exposed path.
   golang.org/x/crypto updates to v0.56.0, clearing GO-2026-6354 and GO-2026-6355, denial of service through
   deadlocked SSH channels, and GO-2026-5932, unmaintained openpgp package. Argo CD's Git SSH transport makes
-  these reachable through ssh.NewClientConn.
+  these reachable through ssh.NewClientConn. The go directive moves to 1.26.6, the first patched release on that
+  line for GO-2026-6179 and GO-2026-6180: with GOTOOLCHAIN=auto a builder downloads the toolchain the directive
+  names, so 1.26.0 pinned every build to an unpatched toolchain. Two advisories remain in k8s.io/kubernetes with
+  no released fix upstream.
 time: 2026-09-16T15:14:06+02:00
