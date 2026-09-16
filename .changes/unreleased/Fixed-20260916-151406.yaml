@@ -1,0 +1,2 @@
+kind: Fixed
+body: Update gRPC to v1.83.2 to address GO-2026-6348 (heap exhaustion via HTTP/2 DATA frame fragmentation) and GO-2026-6443 (server panic on missing authority or Host header)
