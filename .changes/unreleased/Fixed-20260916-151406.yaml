@@ -1,0 +1,13 @@
+kind: Fixed
+body: |-
+  google.golang.org/grpc moves to 1.83.2, clearing GO-2026-6348, heap exhaustion through HTTP/2 DATA frame
+  fragmentation, and GO-2026-6443, a server panic on a missing authority or Host header. govulncheck did not
+  report either as reachable from this module, so the bump is hygiene rather than an exposed path.
+  golang.org/x/crypto updates to v0.56.0, clearing GO-2026-6354 and GO-2026-6355, denial of service through
+  deadlocked SSH channels, which Argo CD's Git SSH transport makes reachable through ssh.NewClientConn.
+  GO-2026-5932, the unmaintained openpgp package, has no fixed version and still applies to v0.56.0; govulncheck
+  reports it in a required module rather than in called code. The go directive moves to 1.26.6, the first
+  patched release on that line for GO-2026-6179 and GO-2026-6180: the directive is the minimum toolchain a build accepts, and with
+  GOTOOLCHAIN=auto a builder older than it downloads that version, so 1.26.0 let an unpatched toolchain build
+  this module. Two advisories remain in k8s.io/kubernetes with no released fix upstream.
+time: 2026-09-16T15:14:06+02:00
